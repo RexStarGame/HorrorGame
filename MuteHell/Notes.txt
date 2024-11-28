@@ -1,0 +1,6 @@
+-Gameplay is about distracting monsters to survive longer
+
+-Win condition undetermined
+[Alvin] One idea is to make the game high score based, so it's about surviving the longest to get a good score (Arcade Horror)
+
+tbd-
