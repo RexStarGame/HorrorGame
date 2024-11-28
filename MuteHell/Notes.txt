@@ -4,4 +4,18 @@
 -Win condition undetermined
 [Alvin] One idea is to make the game high score based, so it's about surviving the longest to get a good score (Arcade Horror)
 
+
 tbd-
+
+Lyd effect.
+Fjende
+a way a player can die.
+Survival Time.
+jump mekanik. 
+Chunk performance. - Patrick
+LOD
+Masking 3D - Patrick
+music box distractions.
+fjenden følger efter lyd kan ikke se. 
+design af verdenen. 
+ 
