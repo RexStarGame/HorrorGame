@@ -10,7 +10,7 @@ tbd-
 Lyd effect.
 Fjende
 a way a player can die.
-Survival Time.
+Survival Time. - William
 jump mekanik. 
 Chunk performance. - Patrick
 LOD
