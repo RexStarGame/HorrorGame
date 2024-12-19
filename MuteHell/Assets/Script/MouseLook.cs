@@ -4,9 +4,9 @@ public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;  // Sensitivity for mouse movement
 
-    public Transform playerBody;  // Reference to the player's body for rotating the entire character (yaw rotation)
+    public Transform playerBody;  
 
-    private float xRotation = 0f;  // Used to store the vertical (pitch) rotation
+    private float xRotation = 0f;  
 
     void Start()
     {
