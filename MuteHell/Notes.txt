@@ -8,7 +8,7 @@
 tbd-
 
 Lyd effect.
-Fjende
+Fjende - Alvin
 a way a player can die.
 Survival Time. - William
 jump mekanik. 
