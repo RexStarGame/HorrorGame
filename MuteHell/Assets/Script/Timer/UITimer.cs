@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
 public class UITimer : MonoBehaviour
 {
-    public float TimeSurvived;
+    public TimerData timerData = new TimerData();
     public bool playing;
     public TMP_Text timerText;
     public SaveData saveData;
@@ -22,20 +23,20 @@ public class UITimer : MonoBehaviour
     {
         if (playing == true) // er i live
         {
-            TimeSurvived += Time.deltaTime;
-            int hours = Mathf.FloorToInt(TimeSurvived / 60f);
-            int minutes = Mathf.FloorToInt(TimeSurvived / 60f);
-            int seconds = Mathf.FloorToInt(TimeSurvived % 60f);
-            int milliseconds = Mathf.FloorToInt((TimeSurvived * 100f) % 100f);
-            timerText.text = hours.ToString("00") + ":" + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
+            timerData.TimeSurvived += Time.deltaTime;
+            int hours = Mathf.FloorToInt(timerData.TimeSurvived / 3600f);
+            int minutes = Mathf.FloorToInt((timerData.TimeSurvived % 3600f) / 60f);
+            int seconds = Mathf.FloorToInt(timerData.TimeSurvived % 60f);
+            int milliseconds = Mathf.FloorToInt((timerData.TimeSurvived * 100f) % 100f);
+            timerText.text = $"{hours:00}:{minutes:00}:{seconds:00}:{milliseconds:00}";
 
         }
     }
 
     private void OnApplicationQuit()
     {
-        saveData.dataSaver();
+        saveData.SaveTimer(timerData);
     }
-
+    
 }
 
