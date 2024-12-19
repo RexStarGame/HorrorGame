@@ -10,6 +10,7 @@ public class FirstMonster : MonoBehaviour
     //default state for the monster is prowling
     public Transform[] waypoints;
     public string target;
+    public float targetdistance;
     NavMeshAgent monsterAI;
     [SerializeField] int currentIndex;
     // Start is called before the first frame update
@@ -32,7 +33,7 @@ public class FirstMonster : MonoBehaviour
             monsterAI.SetDestination(waypoints[currentIndex].position);
         }
         GameObject player = GameObject.FindWithTag("Player");
-        if (Vector3.Distance(transform.position, player.transform.position) < 5)
+        if (Vector3.Distance(transform.position, player.transform.position) < targetdistance)
             target = "Player";
         if (target == "Player")
         {
