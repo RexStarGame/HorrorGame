@@ -1,42 +1,37 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ChunkPerformenceLoader : MonoBehaviour
+public class ChunkPerformanceLoader : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject[] chunkParents;
     [SerializeField] private float activationDistance = 1.0f;
     [SerializeField] private float checkInterval = 1f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine((IEnumerator)CheckChunkDistance());
+        StartCoroutine(CheckChunkDistance());
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    IEnumerable CheckChunkDistance()
+
+    private IEnumerator CheckChunkDistance()
     {
         while (true)
         {
-            foreach (GameObject chunckparent in chunkParents)
+            foreach (GameObject chunkParent in chunkParents)
             {
-                float distanceToPlayer = Vector2.Distance(player.transform.position, chunckparent.transform.position);
+                float distanceToPlayer = Vector3.Distance(player.transform.position, chunkParent.transform.position);
 
-                if(distanceToPlayer <= activationDistance)
+                if (distanceToPlayer <= activationDistance)
                 {
-                    chunckparent.SetActive(true);
+                    chunkParent.SetActive(true);
                 }
                 else
                 {
-                    chunckparent.SetActive(false);
+                    chunkParent.SetActive(false);
                 }
             }
+
             yield return new WaitForSeconds(checkInterval);
         }
     }
