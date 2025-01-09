@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
         // Determine if the run key (Shift) is being pressed, and don't run while sneaking
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isSneaking;
-
+        bool isJumping = Input.GetKey(KeyCode.Space);
         // Set movement speed (run, walk, or sneak)
         float speed = isSneaking ? sneakSpeed : (isRunning ? runSpeed : walkSpeed);
 
@@ -73,6 +73,10 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isSneaking", false);
                 animator.SetBool("isIdle", false);
             }
+            else if (isJumping)
+            {
+                animator.SetBool("isJumping", true);
+            }
             else
             {
                 animator.SetBool("isWalking", true);
@@ -80,6 +84,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isSneaking", false);
                 animator.SetBool("isIdle", false);
             }
+  
         }
         else
         {

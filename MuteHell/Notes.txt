@@ -11,11 +11,12 @@ Lyd effect.
 Fjende - Alvin
 a way a player can die.
 Survival Time. - William
-jump mekanik. 
-Chunk performance. - Patrick
-LOD
+jump mekanik. - Patrick
+//Chunk performance. - Patrick lavet. 
+//LOD - Patrick Lavet. 
 Masking 3D - Patrick
 music box distractions.
 fjenden følger efter lyd kan ikke se. 
-design af verdenen. 
+design af verdenen. - William.
+
  
