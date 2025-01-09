@@ -10,6 +10,7 @@ public class FirstMonster : MonoBehaviour
     //default state for the monster is prowling
     public Transform[] waypoints;
     public string target;
+    public bool targetsSound = false;
     public float targetingdistance = 15;
     NavMeshAgent monsterAI;
     [SerializeField] int currentWaypoint;
@@ -34,7 +35,10 @@ public class FirstMonster : MonoBehaviour
         //finding and targeting the player
         GameObject player = GameObject.FindWithTag("Player");
         if (Vector3.Distance(transform.position, player.transform.position) < targetingdistance)
-            target = "Player";
+        {
+            if (targetsSound == false || targetsSound && player.GetComponent<PlayerController>().isRunning || targetsSound && player.GetComponent<PlayerController>().isJumping)
+                target = "Player";
+        }
         if (target == "Player")
             monsterAI.SetDestination(player.transform.position);
     }

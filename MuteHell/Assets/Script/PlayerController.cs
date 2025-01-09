@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 90f;       // Speed at which the player rotates (degrees per second)
     public float gravity = -9.81f;          // Gravity force
 
+    //these have to be public because i want to access them from another script
+    public bool isRunning = false;                  // defined in the update function
+    public bool isJumping = false;                  // defined in the update function
+
     private Vector3 velocity;               // Stores the player's velocity
     private bool isGrounded;                // Check if the player is grounded
 
@@ -45,8 +49,8 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, rotation, 0);
 
         // Determine if the run key (Shift) is being pressed, and don't run while sneaking
-        bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isSneaking;
-        bool isJumping = Input.GetKey(KeyCode.Space);
+        isRunning = Input.GetKey(KeyCode.LeftShift) && !isSneaking;
+        isJumping = Input.GetKey(KeyCode.Space);
         // Set movement speed (run, walk, or sneak)
         float speed = isSneaking ? sneakSpeed : (isRunning ? runSpeed : walkSpeed);
 
