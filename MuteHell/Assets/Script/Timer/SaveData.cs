@@ -46,6 +46,11 @@ public class SaveData : MonoBehaviour
         }
     }
 
+    public List<TimerData> GetAllTimes()
+    {
+        return times;
+    }
+
     [System.Serializable]
     private class TimerListWrapper
     {

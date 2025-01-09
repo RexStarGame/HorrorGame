@@ -16,6 +16,7 @@ public class UITimer : MonoBehaviour
     private void Start()
     {
         saveData.GetComponent<SaveData>();
+        saveData.LoadData();
         
            playing = true;
     }
