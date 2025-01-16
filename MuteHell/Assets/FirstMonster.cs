@@ -44,8 +44,6 @@ public class FirstMonster : MonoBehaviour
             monsterAI.SetDestination(player.transform.position);
         //targeting the defined target object (for distractions)
         if (target == 2)
-        {
             monsterAI.SetDestination(targetObject.transform.position);
-        }
     }
 }
