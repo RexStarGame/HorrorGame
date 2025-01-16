@@ -7,6 +7,7 @@ public class MeineGramofon : MonoBehaviour
     bool firstbounce;
     bool moveup;
     public float speed = 1;
+    bool once = true;
     Vector3 rs;
     Vector3 ps;
     Transform ts;
@@ -18,7 +19,7 @@ public class MeineGramofon : MonoBehaviour
     {
         ts = transform;
         ps = ts.position;
-        rs = ts.eulerAngles;
+        rs = ts.rotation.eulerAngles;
     }
 
     // Update is called once per frame
@@ -26,7 +27,7 @@ public class MeineGramofon : MonoBehaviour
     {
         t = transform;
         p = t.position;
-        r = t.eulerAngles;
+        r = t.rotation.eulerAngles;
         if (Input.GetKey(KeyCode.E))
         {
             start = true;
@@ -40,12 +41,16 @@ public class MeineGramofon : MonoBehaviour
 
         if (start)
         {
-            Debug.Log("animation started");
+            if (once)
+            {
+                Debug.Log("animation started");
+                once = false;
+            }
 
             if (firstbounce)
             {
                 Debug.Log("first bounce initiated");
-                if (r.z == 20)
+                if (r.z >= 19)
                 {
                     firstbounce = false;
                     Debug.Log("first bounce complete");
@@ -58,13 +63,35 @@ public class MeineGramofon : MonoBehaviour
                 }
                 else
                 {
-
-                    r = Vector3.Lerp(r, new Vector3(r.x, r.y, 20), Time.deltaTime);
+                    r = Vector3.Lerp(r, new Vector3(r.x, r.y, 25), speed);
                     float z = r.z;
                     Debug.Log("rotation.z changed");
                     Debug.Log(z);
                 }
             }
+            if (!firstbounce)
+            {
+                if (r.z >= 19)
+                {
+                    isitleft = false;
+                }
+                if (r.z <= -19)
+                    isitleft = true;
+                {
+
+                }
+                if (!isitleft)
+                {
+                    //r = Vector3.Lerp(r, new Vector3(r.x, r.y, 25), speed);
+                    r = Vector3.RotateTowards(r, new Vector3(r.x, r.y, 25), 100, 100);
+                }
+                if (isitleft)
+                {
+                    //r = Vector3.Lerp(r, new Vector3(r.x, r.y, 25), speed);
+                    r = Vector3.RotateTowards(r, new Vector3(r.x, r.y, -25), 100, 100);
+                }
+            }
         }
+        transform.localEulerAngles = r;
     }
 }
