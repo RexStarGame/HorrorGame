@@ -1,11 +1,14 @@
+date due: Thursday 6. March
+
 -Gameplay is about distracting monsters to survive longer
 -For example, sound based distraction
 
 -Win condition undetermined
 [Alvin] One idea is to make the game high score based, so it's about surviving the longest to get a good score (Arcade Horror)
+[Leyla] we could also just make it about surviving 15 minutes or so, and no highscores maybe, just survive untill "dawn"
 
 
-tbd-
+to be done-
 
 Lyd effect.
 Fjende - Alvin
@@ -15,7 +18,7 @@ jump mekanik. - Patrick
 //Chunk performance. - Patrick lavet. 
 //LOD - Patrick Lavet. 
 Masking 3D - Patrick
-music box distractions.
+music box distractions/interactables. -Leyla
 fjenden følger efter lyd kan ikke se. 
 design af verdenen. - William.
 
