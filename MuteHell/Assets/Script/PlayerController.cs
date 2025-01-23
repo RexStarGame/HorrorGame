@@ -6,12 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;  // Reference to the CharacterController component
     public Animator animator;               // Reference to the Animator component
+    public Rigidbody rig;
+
 
     public float walkSpeed = 2f;            // Walking speed
     public float runSpeed = 6f;             // Running speed
     public float sneakSpeed = 1f;           // Sneaking speed (slower than walking)
     public float rotationSpeed = 90f;       // Speed at which the player rotates (degrees per second)
     public float gravity = -9.81f;          // Gravity force
+    public float jumpForce = 5f; // spillerens spring kraft. 
+
+
+
 
     //these have to be public because i want to access them from another script
     public bool isRunning = false;                  // defined in the update function
@@ -23,16 +29,16 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Initialize components
-        controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>(); // henter character controller fra gameobject
+        animator = GetComponent<Animator>(); // henter animator fra gameobject
     }
 
     void Update()
     {
         // Check if the player is grounded
-        isGrounded = controller.isGrounded;
+        isGrounded = controller.isGrounded; // isGrounded er true hvis vi er på jorden
 
-        if (isGrounded && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)  // hvis vi er på jorden og velocity.y er mindre end 0
         {
             velocity.y = -2f;  // Small downward force to ensure we stick to the ground
         }
@@ -50,57 +56,73 @@ public class PlayerController : MonoBehaviour
 
         // Determine if the run key (Shift) is being pressed, and don't run while sneaking
         isRunning = Input.GetKey(KeyCode.LeftShift) && !isSneaking;
-        isJumping = Input.GetKey(KeyCode.Space);
+        if (isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space)) // hvis vi trykker på space
+            {
+                velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity); // beregner jump force
+                isJumping = true; // isJumping er true
+                animator.SetTrigger("isJumping"); // trigger animator
+                animator.SetBool("IsJumping", true); // setter animator til true
+            }
+            else if (isJumping)  // Nulstil kun hvis vi var i luften
+            {
+                isJumping = false; // isJumping er false
+                animator.SetBool("IsJumping", false); // setter animator til false
+            }
+        }
+
         // Set movement speed (run, walk, or sneak)
-        float speed = isSneaking ? sneakSpeed : (isRunning ? runSpeed : walkSpeed);
+        float speed = isSneaking ? sneakSpeed : (isRunning ? runSpeed : walkSpeed); // beregner speed
 
         // Move the player forward/backward
-        Vector3 moveDirection = transform.forward * moveZ;
+        Vector3 moveDirection = transform.forward * moveZ; // beregner moveDirection
 
         // Move the player
-        controller.Move(moveDirection * speed * Time.deltaTime);
+        controller.Move(moveDirection * speed * Time.deltaTime); // beregner moveDirection
 
         // Update animator based on movement
-        if (Mathf.Abs(moveZ) > 0.1f)
+        if (Mathf.Abs(moveZ) > 0.1f) // hvis vi bevger os 
         {
-            if (isSneaking)
+            if (isSneaking) // hvis vi er sneaking
             {
-                animator.SetBool("isSneaking", true);
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isRunning", false);
-                animator.SetBool("isIdle", false);
+                animator.SetBool("isSneaking", true); // setter animator til true
+                animator.SetBool("isWalking", false); // setter animator til false
+                animator.SetBool("isRunning", false); // setter animator til false
+                animator.SetBool("isIdle", false); // setter animator til false
             }
-            else if (isRunning)
+            else if (isRunning) // hvis vi er running
             {
-                animator.SetBool("isRunning", true);
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isSneaking", false);
-                animator.SetBool("isIdle", false);
+                animator.SetBool("isRunning", true); // setter animator til true
+                animator.SetBool("isWalking", false); // setter animator til false
+                animator.SetBool("isSneaking", false); // setter animator til false
+                animator.SetBool("isIdle", false); // setter animator til false
             }
-            else if (isJumping)
+            else if (isJumping) // hvis vi er i luften
             {
-                animator.SetBool("isJumping", true);
+                animator.SetTrigger("isJumping"); // trigger animator
             }
             else
             {
-                animator.SetBool("isWalking", true);
-                animator.SetBool("isRunning", false);
-                animator.SetBool("isSneaking", false);
-                animator.SetBool("isIdle", false);
+                animator.SetBool("isWalking", true); // setter animator til true
+                animator.SetBool("isRunning", false); // setter animator til false
+                animator.SetBool("isSneaking", false); // setter animator til false
+                animator.SetBool("isIdle", false); // setter animator til false
             }
   
         }
         else
         {
             // If not moving, set to idle
-            animator.SetBool("isIdle", true);
-            animator.SetBool("isWalking", false);
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isSneaking", false);
+            animator.SetBool("isIdle", true); // setter animator til true
+            animator.SetBool("isWalking", false); // setter animator til false
+            animator.SetBool("isRunning", false); // setter animator til false
+            animator.SetBool("isSneaking", false); // setter animator til false
+            animator.SetBool("IsJumping", false); // setter animator til false
         }
 
         // Apply gravity
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        velocity.y += gravity * Time.deltaTime; // beregner velocity.y
+        controller.Move(velocity * Time.deltaTime); // beregner velocity    
     }
 }
