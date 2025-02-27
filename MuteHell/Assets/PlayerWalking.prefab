@@ -232,7 +232,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   tablePickupItems: []
-  raycastOrigin: {fileID: 3472320885649363207}
+  raycastOrigin: {fileID: 7983122879110483905}
   handTransform: {fileID: 773675463399771231}
   minChargeTime: 1.5
   floorPickupAnimationDuration: 4
@@ -968,8 +968,7 @@ Transform:
   m_LocalPosition: {x: 0.21301271, y: 0.12499804, z: -0.6439972}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1733111666156292576}
+  m_Children: []
   m_Father: {fileID: 3472320885649363207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5152579457268092932
@@ -1430,46 +1429,6 @@ Transform:
   - {fileID: 5389678413276398071}
   m_Father: {fileID: 2863708586532035906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3857233410131055772
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1733111666156292576}
-  - component: {fileID: 5292030823412050424}
-  m_Layer: 0
-  m_Name: 'AudioListener '
-  m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1733111666156292576
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3857233410131055772}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.169, y: -0.428, z: 0.649}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7983122879110483905}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &5292030823412050424
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3857233410131055772}
-  m_Enabled: 1
 --- !u!1 &3920937063919239387
 GameObject:
   m_ObjectHideFlags: 0
