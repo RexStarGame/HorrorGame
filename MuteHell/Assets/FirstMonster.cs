@@ -26,7 +26,9 @@ public class FirstMonster : MonoBehaviour
     void Update()
     {
         //prowling
-        if (target == 0 && Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 0.8f)
+        if (target == 0)
+        monsterAI.SetDestination(transform.position);
+        if (target == 1 && Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 0.8f)
         {
             currentWaypoint++;
             if (currentWaypoint == waypoints.Length)
@@ -37,13 +39,22 @@ public class FirstMonster : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         if (Vector3.Distance(transform.position, player.transform.position) < targetingdistance)
         {
-            if (targetsSound == false || targetsSound && player.GetComponent<PlayerController>().isRunning || targetsSound && player.GetComponent<PlayerController>().isJumping)
-                target = 1;
+            RaycastHit hit;
+            Physics.Raycast(transform.position, (player.transform.position + Vector3.up) - transform.position, out hit, targetingdistance );
+            Debug.Log(hit.collider.name);
+            if (hit.collider.CompareTag("Player"))
+            {
+                target = 2;
+                Debug.Log("Kan se spiller");
+            }
+            Debug.DrawRay(transform.position, (  (player.transform.position+ Vector3.up)- transform.position) * 5, Color.red);
+           // if (targetsSound == false || targetsSound && player.GetComponent<PlayerController>().isRunning || targetsSound && player.GetComponent<PlayerController>().isJumping)
+            //    target = 2;
         }
-        if (target == 1)
+        if (target == 2)
             monsterAI.SetDestination(player.transform.position);
         //targeting the defined target object (for distractions)
-        if (target == 2)
+        if (target == 3)
             monsterAI.SetDestination(targetObject.transform.position);
     }
 }
