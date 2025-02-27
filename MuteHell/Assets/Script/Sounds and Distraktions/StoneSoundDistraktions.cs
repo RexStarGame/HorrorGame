@@ -64,7 +64,12 @@ public class StoneSoundDistraktions : MonoBehaviour
                         audioSource.PlayOneShot(audioSource.clip);
 
                     }
-                     
+                    GameObject monster = GameObject.FindWithTag("Monster");
+                    if (monster != null)
+                    {
+                        monster.GetComponent<FirstMonster>().target = 3;
+                        monster.GetComponent<FirstMonster>().targetObject = this.gameObject;
+                    }
                     // Set the flag so the sound doesn't play again until the stone is thrown again
                     hasCollidedAfterThrow = true;
                 }
