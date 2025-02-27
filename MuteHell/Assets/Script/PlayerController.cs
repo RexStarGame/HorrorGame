@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5f; // spillerens spring kraft. 
     private float playerWhaigt; // spilleren vejer mere og falder ned hurtiger. 
 
-    public float currenthealth = 100f; // spillerens liv. 
-    public float maxHealth = 100f; // max health. 
+    //public float currenthealth = 100f; // spillerens liv. 
+    //public float maxHealth = 100f; // max health. 
 
     //these have to be public because i want to access them from another script
     public bool isRunning = false;                  // defined in the update function
