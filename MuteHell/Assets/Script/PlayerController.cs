@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,9 +16,10 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 90f;       // Speed at which the player rotates (degrees per second)
     public float gravity = -9.81f;          // Gravity force
     public float jumpForce = 5f; // spillerens spring kraft. 
+    private float playerWhaigt; // spilleren vejer mere og falder ned hurtiger. 
 
-
-
+    public float currenthealth = 100f; // spillerens liv. 
+    public float maxHealth = 100f; // max health. 
 
     //these have to be public because i want to access them from another script
     public bool isRunning = false;                  // defined in the update function
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        isGrounded = false;
+        playerWhaigt = 0;
         // Initialize components
         controller = GetComponent<CharacterController>(); // henter character controller fra gameobject
         animator = GetComponent<Animator>(); // henter animator fra gameobject
@@ -98,10 +102,6 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isSneaking", false); // setter animator til false
                 animator.SetBool("isIdle", false); // setter animator til false
             }
-            else if (isJumping) // hvis vi er i luften
-            {
-                animator.SetTrigger("isJumping"); // trigger animator
-            }
             else
             {
                 animator.SetBool("isWalking", true); // setter animator til true
@@ -120,7 +120,22 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isSneaking", false); // setter animator til false
             animator.SetBool("IsJumping", false); // setter animator til false
         }
-
+         if (isJumping && isGrounded == true) // hvis vi er i luften
+        {
+            animator.SetTrigger("isJumping"); // trigger animator
+            playerWhaigt = 5f; // tilføjer extra vægt til spilleren, spilleren falder hurtiger ned efter håb.
+            isGrounded = false; // spilleren er ikke på grund.
+            if(playerWhaigt > 0 )
+            {
+                
+            }
+        }
+         else // tjækker spilleren om spilleren er på grund eller ej. 
+        {
+            isGrounded = true; // spilleren er på grund, og kan  håbbe igen.
+            playerWhaigt = 0f; // spillerens vægt er reset til 0.
+            animator.ResetTrigger("isJumping"); // stopper animationen. 
+        }
         // Apply gravity
         velocity.y += gravity * Time.deltaTime; // beregner velocity.y
         controller.Move(velocity * Time.deltaTime); // beregner velocity    

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerHideMekanik : MonoBehaviour
 {
-    public 
+    private bool isHidden = false; // om spilleren er skjult 
+    [SerializeField] private GameObject player; // spilleren
+    [SerializeField] private LayerMask chunkLayer; // layer for chunks
+    
     // Start is called before the first frame update
     void Start()
     {

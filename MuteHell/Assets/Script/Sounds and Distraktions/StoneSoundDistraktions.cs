@@ -16,7 +16,7 @@ public class StoneSoundDistraktions : MonoBehaviour
         hasBeenThrown = false;
         hasCollidedAfterThrow = false;
 
-        Debug.Log($"{gameObject.name} Awake called. hasBeenThrown: {hasBeenThrown}, hasCollidedAfterThrow: {hasCollidedAfterThrow}");
+
     }
 
     // Call this method to indicate that the stone has been thrown
@@ -24,7 +24,7 @@ public class StoneSoundDistraktions : MonoBehaviour
     {
         hasBeenThrown = true;
         hasCollidedAfterThrow = false; // Reset collision flag
-        Debug.Log($"{gameObject.name} SetThrown called. hasBeenThrown set to true.");
+  
     }
 
     // Call this method when the stone is picked up
@@ -32,7 +32,7 @@ public class StoneSoundDistraktions : MonoBehaviour
     {
         hasBeenThrown = false;
         hasCollidedAfterThrow = false;
-        Debug.Log($"{gameObject.name} OnPickedUp called. hasBeenThrown set to false.");
+    
     }
 
     // Call this method when the stone is dropped
@@ -40,13 +40,13 @@ public class StoneSoundDistraktions : MonoBehaviour
     {
         hasBeenThrown = false;
         hasCollidedAfterThrow = false;
-        Debug.Log($"{gameObject.name} OnDropped called. hasBeenThrown set to false.");
+
     }
 
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"{gameObject.name} OnCollisionEnter called. hasBeenThrown: {hasBeenThrown}, hasCollidedAfterThrow: {hasCollidedAfterThrow}");
+
 
         if (hasBeenThrown && !hasCollidedAfterThrow)
         {
@@ -54,7 +54,7 @@ public class StoneSoundDistraktions : MonoBehaviour
             if (rb != null)
             {
                 float speed = rb.velocity.magnitude;
-                Debug.Log($"Stone speed on collision: {speed}");
+
 
                 if (speed > 0.1f) // Adjust threshold as needed
                 {
@@ -62,24 +62,13 @@ public class StoneSoundDistraktions : MonoBehaviour
                     if (audioSource != null && audioSource.clip != null)
                     {
                         audioSource.PlayOneShot(audioSource.clip);
-                        Debug.Log("Stone collided and sound played using PlayOneShot.");
-                    }
-                    else
-                    {
-                        Debug.LogWarning("AudioSource or AudioClip is null on " + gameObject.name);
-                    }
 
+                    }
+                     
                     // Set the flag so the sound doesn't play again until the stone is thrown again
                     hasCollidedAfterThrow = true;
                 }
-                else
-                {
-                    Debug.Log("Collision velocity too low; sound not played.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Rigidbody component missing on " + gameObject.name);
+            
             }
         }
     }
