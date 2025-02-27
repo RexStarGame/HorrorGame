@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -139,5 +140,17 @@ public class PlayerController : MonoBehaviour
         // Apply gravity
         velocity.y += gravity * Time.deltaTime; // beregner velocity.y
         controller.Move(velocity * Time.deltaTime); // beregner velocity    
+    }
+  
+    public void PlayerIsDead(bool playerHasDied)
+    {
+       if(playerHasDied)
+        {
+            GameObject.Destroy(gameObject);
+            if (gameObject == null)
+            {
+                Time.timeScale = 0f;
+            }   
+        }
     }
 }
