@@ -15,7 +15,6 @@ public class ItemPickupController : MonoBehaviour
 
     public float normalThrowForce = 10f;
     public float maxThrowForce = 20f;
-    public float forceUp = 5f; 
     private float currentThrowForce;
     public float chargeSpeed = 10f; // How fast the throw force charges
     private bool isChargingThrow = false;
@@ -192,30 +191,6 @@ public class ItemPickupController : MonoBehaviour
 
         
     }
-
-    void ReleaseThrow()
-    {
-    
-        if (currentThrowForce >= maxThrowForce)
-        {
-            animator.SetBool("throwItem2", false);
-            Debug.Log("Set throwItem2 to false");
-            isThrowingAktiv = true;
-            IsTrowingLow = false;
-
-
-        }
-        else
-        {
-            animator.SetBool("throwItem", false);
-            Debug.Log("Set throwItem to false");
-            isThrowingAktiv = false;
-            IsTrowingLow = true;
-        }
-
-        // kør coroutine.
-        StartCoroutine(ThrowItemCoroutine());
-    }
     IEnumerator ThrowItemCoroutine()
     {
         isThrowing = true; // Angiv at kast er startet
@@ -260,10 +235,6 @@ public class ItemPickupController : MonoBehaviour
             inventory.Remove(equippedItem);
             equippedItem = null; // Nulstil referencen
         }
-
-        // Lad animationen afslutte naturligt
-       
-      
             // Kast objektet efter en bestemt tid
             yield return new WaitForSeconds(animationVarighed);
        
@@ -442,22 +413,6 @@ public class ItemPickupController : MonoBehaviour
 
         Debug.Log($"Equipped new item: {equippedItem.name}");
     }
-    
-    IEnumerable PickUpitem()
-    {
-        float pickupEarly = 4; // hvornår under animationen samler spilleren object op.
-
-
-
-        yield return new WaitForSeconds(pickupEarly);
-
-        //...
-        if(true)
-        {
-
-        }
-    }
-    
     void DropItem()
     {
         if (equippedItem != null)
@@ -548,7 +503,6 @@ public class ItemPickupController : MonoBehaviour
             selectedItemIndex = 3;
             ShowSelectedItem();
         }
-        // Add more keys if needed
     }
     void ShowSelectedItem()
     {

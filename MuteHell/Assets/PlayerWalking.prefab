@@ -210,12 +210,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10582575495503371}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1f1fe9e863995d4fb458244c0e6ff38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupRange: 6
+  pickupRange: 1.35
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -225,7 +225,6 @@ MonoBehaviour:
   maxItems: 10
   normalThrowForce: 10
   maxThrowForce: 20
-  forceUp: 2
   chargeSpeed: 10
   inventory: []
   floorPickupItems:
@@ -234,7 +233,7 @@ MonoBehaviour:
   tablePickupItems: []
   raycastOrigin: {fileID: 7983122879110483905}
   handTransform: {fileID: 773675463399771231}
-  minChargeTime: 1.5
+  minChargeTime: 0.5
   floorPickupAnimationDuration: 4
   tablePickupAnimationDuration: 4
   isThrowingAktiv: 0
@@ -949,6 +948,7 @@ GameObject:
   - component: {fileID: 2370504820078209225}
   - component: {fileID: 4704693736125052571}
   - component: {fileID: 5447428097302316516}
+  - component: {fileID: 743229067178884011}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1061,6 +1061,42 @@ MonoBehaviour:
   mouseSensitivity: 100
   pitchLimit: 45
   yawLimit: 90
+--- !u!114 &743229067178884011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2622669498259568349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f1fe9e863995d4fb458244c0e6ff38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupRange: 1.25
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  animator: {fileID: 1465378586401853704}
+  pickupKey: 101
+  throwKey: 116
+  maxItems: 10
+  normalThrowForce: 10
+  maxThrowForce: 20
+  chargeSpeed: 10
+  inventory: []
+  floorPickupItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  tablePickupItems: []
+  raycastOrigin: {fileID: 7983122879110483905}
+  handTransform: {fileID: 6363084581317965421}
+  minChargeTime: 0.2
+  floorPickupAnimationDuration: 2
+  tablePickupAnimationDuration: 2
+  isThrowingAktiv: 0
+  IsTrowingLow: 0
+  pickedItemUpNear: 0
 --- !u!1 &2736379481984339895
 GameObject:
   m_ObjectHideFlags: 0
