@@ -147,8 +147,8 @@ public class PlayerController : MonoBehaviour
             GameObject.Destroy(gameObject);
             if (gameObject == null)
             {
-                Time.timeScale = 0f;
-                
-            }   
+            Time.timeScale = 0f;
+            GameObject.FindWithTag("Timer").GetComponent<UITimer>().playing = false;
+        }   
     }
 }
