@@ -33,11 +33,12 @@ public class ItemPickupController : MonoBehaviour
     private bool isThrowing = false;
 
     public Transform raycastOrigin;
-    public Transform handTransform; 
+    public Transform handTransform;
+    RaycastHit hit;
 
     private GameObject equippedItem;
     // Charging Settings
-    public float minChargeTime = 1.5f; 
+    public float minChargeTime = 0.5f; 
     private float chargeTimer = 0f;    
 
     public float floorPickupAnimationDuration = 2f; 
@@ -46,7 +47,9 @@ public class ItemPickupController : MonoBehaviour
 
     public bool isThrowingAktiv = false;
     public bool IsTrowingLow = false;
-
+    RaycastHit boxHit;
+    //Collider boxColider;
+    bool hitBox;
     public bool pickedItemUpNear = false;
     void Update()
     {
@@ -77,11 +80,16 @@ public class ItemPickupController : MonoBehaviour
 
         Vector3 rayOrigin = raycastOrigin.position;
         Vector3 rayDirection = raycastOrigin.forward;
+        Vector3 boxHalfExtents = new Vector3(0.50f, 0.50f, 0.50f); 
 
-        RaycastHit hit;
-        Debug.DrawRay(rayOrigin, rayDirection * pickupRange, Color.red);
+        // Perform the BoxCast and store the result in hitBox
+        hitBox = Physics.BoxCast(rayOrigin, boxHalfExtents, rayDirection, out hit, Quaternion.identity, pickupRange, pickupLayer);
 
-        if (Physics.Raycast(rayOrigin, rayDirection, out hit, pickupRange, pickupLayer))
+        // Debug visualization of BoxCast - using DrawRay instead of incorrect Debug.DrawRay
+        Debug.DrawRay(rayOrigin, rayDirection * pickupRange, Color.green); // Shows the ray direction
+        Debug.DrawLine(rayOrigin - boxHalfExtents, rayOrigin + boxHalfExtents, Color.red); // Box dimensions
+
+        if (hitBox)
         {
             GameObject detectedItem = hit.collider.gameObject;
 
@@ -99,7 +107,6 @@ public class ItemPickupController : MonoBehaviour
             currentItem = null;
         }
     }
-
     void PickupItem()
     {
         if (!canPickUp || isPickingUp)
@@ -143,16 +150,15 @@ public class ItemPickupController : MonoBehaviour
     {
         if (equippedItem != null && !isThrowing)
         {
-            // Tasten T starter kast
+            // Start charging throw
             if (Input.GetKeyDown(throwKey))
             {
                 isChargingThrow = true;
-                currentThrowForce = normalThrowForce; // Start med normal kastkraft
-                chargeTimer = 0f; // Nulstil opladningstimer
-
+                currentThrowForce = normalThrowForce; // Start with normal force
+                chargeTimer = 0f; // Reset charge timer
             }
 
-            // Mens T holdes nede (oplader kastkraft)
+            // Holding the throw key to charge
             if (Input.GetKey(throwKey))
             {
                 chargeTimer += Time.deltaTime;
@@ -160,37 +166,22 @@ public class ItemPickupController : MonoBehaviour
                 currentThrowForce = Mathf.Clamp(currentThrowForce, normalThrowForce, maxThrowForce);
             }
 
-            // Når T slippes
+            // When the throw key is released
             if (Input.GetKeyUp(throwKey))
             {
-                isChargingThrow = false; // Stop opladning
-                PerformThrow();
-            }
-        
-    
-
-            // If the player releases the throw key
-            if (Input.GetKeyUp(throwKey))
-            {
-                // Throw the item
-                if (isChargingThrow)
-                {
-                    isChargingThrow = false;
-                    ReleaseThrow();
-                }
+                isChargingThrow = false; // Stop charging
                 if (chargeTimer >= minChargeTime)
                 {
-                    ReleaseThrow();
+                    PerformThrow();
                 }
                 else
                 {
-                   
-                    //CancelThrow();
                     CancelThrow();
                 }
             }
         }
     }
+
     void CancelThrow()
     {
         Debug.Log("Throw canceled due to insufficient charge time.");
@@ -559,13 +550,6 @@ public class ItemPickupController : MonoBehaviour
         }
         // Add more keys if needed
     }
-    // New method to handle the throw action via Animation Event
-    // New method to handle the throw action via Animation Event
-
-
-    
-
-
     void ShowSelectedItem()
     {
         // Deactivate all items in inventory

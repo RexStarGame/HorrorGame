@@ -150,6 +150,7 @@ public class PlayerController : MonoBehaviour
             if (gameObject == null)
             {
                 Time.timeScale = 0f;
+                
             }   
         }
     }
