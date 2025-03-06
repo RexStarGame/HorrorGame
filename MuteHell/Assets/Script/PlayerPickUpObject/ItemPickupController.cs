@@ -34,7 +34,6 @@ public class ItemPickupController : MonoBehaviour
     public Transform raycastOrigin;
     public Transform handTransform;
     RaycastHit hit;
-
     private GameObject equippedItem;
     // Charging Settings
     public float minChargeTime = 0.5f; 
