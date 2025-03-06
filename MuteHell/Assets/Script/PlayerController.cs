@@ -142,16 +142,13 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime); // beregner velocity    
     }
   
-    public void PlayerIsDead(bool playerHasDied)
+    public void PlayerIsDead()
     {
-       if(playerHasDied)
-        {
             GameObject.Destroy(gameObject);
             if (gameObject == null)
             {
-                Time.timeScale = 0f;
-                
-            }   
-        }
+            Time.timeScale = 0f;
+            GameObject.FindWithTag("Timer").GetComponent<UITimer>().playing = false;
+        }   
     }
 }

@@ -25,9 +25,10 @@ public class FirstMonster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //prowling
+        //monster has no target (should just stand still)
         if (target == 0)
-        monsterAI.SetDestination(transform.position);
+            monsterAI.SetDestination(transform.position);
+        //prowling
         if (target == 1 && Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 0.8f)
         {
             currentWaypoint++;
@@ -57,5 +58,11 @@ public class FirstMonster : MonoBehaviour
         //targeting the defined target object (for distractions)
         if (target == 3)
             monsterAI.SetDestination(targetObject.transform.position);
-    }
+        //demolishing the player
+        if (Vector3.Distance(transform.position, player.transform.position) < 1.5f)
+        {
+            player.GetComponent<PlayerController>().PlayerIsDead();
+        }
+            
+    }          
 }
